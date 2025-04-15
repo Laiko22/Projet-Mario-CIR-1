@@ -1,33 +1,34 @@
 #include "mario.h"
 
+int cameraX = 0; // Position de la caméra
+
 void affichage(char map[H_MAP][L_MAP]) {
+    printf("\033[H"); // Curseur en haut
 
-	for (int i = 0; i < H_SCREEN; i++) {
-		for (int j = 0; j < L_SCREEN; j++ ) {
-			if (map[i][j] == '.')
-			{
-				printf("\033[30m%c\033[0m", map[i][j]);
-			}
-			else
-			{
-				printf("%c", map[i][j]);
-			}
-		}
-		printf("\n");
-		
-	}
+    char ligne[L_SCREEN + 1];
+    ligne[L_SCREEN] = '\0';
 
-	if (_kbhit()) {
-		char touche = _getch();
+    for (int i = 0; i < H_SCREEN; i++) {
+        for (int j = 0; j < L_SCREEN; j++) {
+            ligne[j] = map[i][j + cameraX];
+        }
+        printf("%s\n", ligne);
+    }
+}
 
-		if (touche == 75) { //FLECHE GAUCHE
-			
-		}
-		else if (touche == 77) { //FLECH DROITE
-			
-		}
-		else if (touche == 32) { // ESPACE
 
-		}
-	}
+void commande(int touche, char map[H_MAP][L_MAP]) {
+    if (touche == 75) { // GAUCHE
+        if (cameraX > 0)
+            cameraX--;
+    }
+    else if (touche == 77) { // DROITE
+        if (cameraX < L_MAP - L_SCREEN)
+            cameraX++;
+    }
+    else if (touche == 32) {
+        // Gestion du saut (à faire)
+    }
+
+    affichage(map);
 }

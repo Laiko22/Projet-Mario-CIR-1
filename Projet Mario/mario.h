@@ -11,5 +11,6 @@
 #include <conio.h>
 
 void affichage(char map[H_MAP][L_MAP]);
+void commande(int touche, char map[H_MAP][L_MAP]);
 
 #endif
