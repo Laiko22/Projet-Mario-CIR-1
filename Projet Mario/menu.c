@@ -1,7 +1,12 @@
 #include "menu.h"
 
 char obtenir_touche() {
-	return _kbhit() ? _getch() : 0;
+	if (_kbhit()) {
+		return _getch();
+	}
+	else {
+		return 0;
+	}
 }
 
 void pause_console() {
@@ -36,14 +41,14 @@ int gestion_touches_fleche(int* selection, int max) {
 	char cle = obtenir_touche();
 	if (cle == -32 || cle == 0) {
 		cle = obtenir_touche();
-		if (cle == 72 && *selection > 0) {
+		if (cle == 72 && *selection > 0) { //fleche haut
 			(*selection)--;
 		}
-		else if (cle == 80 && *selection < max) {
+		else if (cle == 80 && *selection < max) { // fleche bas
 			(*selection)++;
 		}
 	}
-	else if (cle == 27) {
+	else if (cle == 27) { // echap
 		return -1;
 	}
 	return 0;
@@ -53,7 +58,7 @@ void choix_pseudo(char* pseudo) {
 	effacer_ecran();
 	printf("=== Choix du pseudo ===\n\n");
 	printf("Entrez votre pseudo : ");
-	scanf_s("%49s", pseudo, (unsigned)_countof(pseudo));
+	scanf_s("%s", pseudo);
 	pause_console();
 }
 
@@ -95,6 +100,6 @@ void nouvelle_partie() {
 	choix_pseudo(pseudo);
 	choix_personnage(perso);
 	effacer_ecran();
-	printf("Nouvelle partie lancée avec %s (%s) !\n", pseudo, perso);
+	printf("Nouvelle partie lancÃ©e avec %s (%s) !\n", pseudo, perso);
 	pause_console();
 }
