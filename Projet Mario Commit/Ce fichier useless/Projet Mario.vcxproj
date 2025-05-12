@@ -24,6 +24,7 @@
     <ProjectGuid>{20453612-dd2a-4d7a-a7eb-33ed73798888}</ProjectGuid>
     <RootNamespace>ProjetMario</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Projet Mario Commit</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,11 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="jeu.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="mario.c" />
     <ClCompile Include="menu.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="jeu.h" />
     <ClInclude Include="mario.h" />
     <ClInclude Include="menu.h" />
   </ItemGroup>

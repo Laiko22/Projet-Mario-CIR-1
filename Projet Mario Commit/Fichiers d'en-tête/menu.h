@@ -7,12 +7,13 @@
 #include <conio.h>
 #include <string.h>
 
+
 #define NB_PERSONNAGES 4
 #define CENTRE_X 56
 
 typedef struct {
-	char nom[50];
-	int score;
+    char nom[50];
+    int score;
 } Joueur;
 
 char obtenir_touche();
@@ -23,7 +24,6 @@ int gestion_touches_fleche(int* selection, int max);
 void choix_pseudo(char* pseudo);
 void choix_personnage(char* perso);
 void nouvelle_partie();
+void executer_menu_principal();
 
-
-#endif 
-
+#endif
