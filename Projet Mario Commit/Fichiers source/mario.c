@@ -1,6 +1,6 @@
 #include "mario.h"
 
-int cameraX = 0; // Position de la caméra
+int cameraX = 0;
 
 void affichage(char map[H_MAP][L_MAP]) {
 
@@ -26,29 +26,26 @@ void commande(int touche, char map[H_MAP][L_MAP]) {
         if (cameraX < L_MAP - L_SCREEN)
             cameraX++;
     }
-    else if (touche == 32) {
-        // Gestion du saut (à faire)
-    }
 
     affichage(map);
 }
 
-// Fonction pour tester si un bloc est solide
+
 int est_solide(int x, int y, char map[H_MAP][L_MAP]) {
-    // Vérifier si la position est en dehors de la carte
+
     if (x < 0 || x >= L_MAP || y < 0 || y >= H_MAP) {
         return 1; // Considérer les bords comme solides
     }
 
-    // Vérifier le type de bloc à cette position
+
     char bloc = map[y][x];
 
+
     // Définir quels caractères représentent des blocs solides
-    // Par exemple, '#' pour un bloc solide, ' ' pour de l'air (ajustez selon votre carte)
-    return (bloc == '#' || bloc == '=' || bloc == '[' || bloc == ']' || bloc == '-');
+    return (bloc == '#' || bloc == '|' || bloc == '_' || bloc == '0' || bloc == '+');
 }
 
-// Fonction pour appliquer la gravité - modifiée pour utiliser un pointeur
+
 void appliquer_gravite(int en_saut, int camera_x, int* position_y, char map[H_MAP][L_MAP]) {
     int map_x = camera_x + PERSO_X;
 
@@ -58,10 +55,12 @@ void appliquer_gravite(int en_saut, int camera_x, int* position_y, char map[H_MA
     }
 }
 
-// Fonction pour dessiner l'écran de jeu
-void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut, int phase_saut) {
+
+void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score) {
     printf("\033[H"); // Curseur en haut
 
+    scoreboard(nbPiece, score);
+    printf("\033[6;1H");
     char ligne[L_SCREEN + 1];
     ligne[L_SCREEN] = '\0';
 
@@ -71,19 +70,16 @@ void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut,
             int map_x = j + camera_x;
 
             // Dessiner le personnage à sa position
-            if (i == position_y && j == PERSO_X) {
-                if (en_saut) {
-                    ligne[j] = '^'; // Personnage en saut
-                }
-                else {
-                    ligne[j] = 'M'; // Personnage normal
-                }
+            if (j == PERSO_X && (i == position_y || i == position_y - 1 || i == position_y - 2)) {
+                if (i == position_y) ligne[j] = '^';
+                else if (i == position_y - 1) ligne[j] = 'T';
+                else if (i == position_y - 2) ligne[j] = 'O';
             }
-            else if (map_x < L_MAP && i < H_MAP) {
+            else if (map_x >= 0 && map_x < L_MAP) {
                 ligne[j] = map[i][map_x];
             }
             else {
-                ligne[j] = ' '; // Espace vide si en dehors des limites
+                ligne[j] = ' ';
             }
         }
         printf("%s\n", ligne);
