@@ -1,8 +1,6 @@
-#include "tbScore.h"
-#include <stdio.h>
-#include <string.h>
-
 void scoreboard(int nbPiece, int score) {
+    // Supprimer la vérification des anciennes valeurs pour que le scoreboard soit toujours affiché
+
     // Déterminer la largeur nécessaire pour le score
     int score_length = 0;
     int temp_score = score;
@@ -15,7 +13,6 @@ void scoreboard(int nbPiece, int score) {
     if (score_length < 5) {
         score_length = 5;
     }
-
 
     // Format: "# Pieces : XXX     Score : YYYYY     #"
     // 34 caractères de base + la différence si score_length > 5

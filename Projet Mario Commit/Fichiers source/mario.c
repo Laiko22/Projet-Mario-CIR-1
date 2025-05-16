@@ -5,28 +5,19 @@ int cameraX = 0;
 
 // Fonction pour initialiser l'affichage et dessiner la carte
 void affichage(char map[H_MAP][L_MAP]) {
-	// Positionnement du curseur en haut à gauche
-	printf("\033[H");
 
-	// Effacer complètement l'écran pour éviter les duplications
-	printf("\033[2J");
+	printf("\033[H"); // Curseur en haut
 
 	char ligne[L_SCREEN + 1];
 	ligne[L_SCREEN] = '\0';
 
 	for (int i = 0; i < H_SCREEN; i++) {
 		for (int j = 0; j < L_SCREEN; j++) {
-			if (j + cameraX < L_MAP) {
-				ligne[j] = map[i][j + cameraX];
-			}
-			else {
-				ligne[j] = ' '; // Pour éviter les dépassements de tableau
-			}
+			ligne[j] = map[i][j + cameraX];
 		}
 		printf("%s\n", ligne);
 	}
 }
-
 
 void commande(int touche, char map[H_MAP][L_MAP]) {
 	if (touche == 75) { // GAUCHE
@@ -73,11 +64,10 @@ void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut,
 
 // Nouvelle fonction dessiner qui prend en compte la position_x du personnage
 void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score, Goomba g) {
-	// Effacer l'écran complètement à chaque fois pour éviter les duplications
-	printf("\033[H"); // Positionnement du curseur en haut
-	printf("\033[2J"); // Code d'effacement complet de l'écran
+	// Au lieu d'effacer l'écran complètement, on place simplement le curseur en haut
+	printf("\033[H"); // Place le curseur en haut de l'écran sans effacer
 
-	// Mettre à jour le scoreboard
+	// Afficher toujours le scoreboard
 	scoreboard(nbPiece, score);
 
 	char ligne[L_SCREEN + 1];
@@ -87,9 +77,6 @@ void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char
 		for (int j = 0; j < L_SCREEN; j++) {
 			// Position dans la carte
 			int map_x = j + camera_x;
-
-			// Initialiser avec un espace par défaut
-			ligne[j] = ' ';
 
 			// Vérifier si c'est le Goomba
 			if (g.x >= camera_x && g.x < camera_x + L_SCREEN && g.x - camera_x == j && i == g.y) {
@@ -105,7 +92,13 @@ void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char
 			else if (map_x >= 0 && map_x < L_MAP && i < H_MAP) {
 				ligne[j] = map[i][map_x];
 			}
+			else {
+				ligne[j] = ' '; // Espace vide pour les zones hors carte
+			}
 		}
-		printf("%s\n", ligne);
+		printf("%s\n", ligne); // Affiche la ligne complète
 	}
+
+	// Flush stdout pour s'assurer que tout est affiché immédiatement
+	fflush(stdout);
 }
