@@ -14,7 +14,7 @@
 void init_vie_state(JeuState* etat);
 
 // Vérifie si le joueur est mort (chute dans le vide ou ennemi)
-int est_mort(JeuState* etat, char map[H_MAP][L_MAP]);
+int est_mort(JeuState* etat, char map[H_MAP][L_MAP], Goomba* goombas, int nb_goombas);
 
 // Affiche le menu de mort lorsqu'une vie est perdue
 int menu_mort(JeuState* etat);

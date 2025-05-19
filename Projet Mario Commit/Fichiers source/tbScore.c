@@ -1,6 +1,8 @@
+#include "tbScore.h"
+#include "tableauScores.h"
+
 void scoreboard(int nbPiece, int score) {
     // Supprimer la vérification des anciennes valeurs pour que le scoreboard soit toujours affiché
-
     // Déterminer la largeur nécessaire pour le score
     int score_length = 0;
     int temp_score = score;
@@ -52,4 +54,8 @@ void scoreboard(int nbPiece, int score) {
         printf("#");
     }
     printf("\n");
+
+    // Sauvegarder les pièces et le score pour les utiliser plus tard dans tableauScores
+    // Cette fonction ne sauvegarde pas immédiatement dans le tableau des scores, mais stocke les valeurs actuelles
+    sauvegarder_score_actuel(nbPiece, score);
 }

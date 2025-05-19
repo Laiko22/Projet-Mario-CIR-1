@@ -8,6 +8,9 @@
 #define L_SCREEN 156
 #define H_MAP 19
 #define L_MAP 469
+#define MAX_GOOMBAS 10
+#define VITESSE_GOOMBA 2
+
 
 typedef struct {
 	int x;
@@ -15,6 +18,7 @@ typedef struct {
 	int direction;
 	int borne_gauche;
 	int borne_droite;
+	int compteur;
 } Goomba;
 
 void initialiser_goomba(Goomba* g, int x, int y);

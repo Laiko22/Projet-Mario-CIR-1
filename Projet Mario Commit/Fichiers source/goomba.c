@@ -1,3 +1,4 @@
+// === FICHIER : goomba.c ===
 #include "goomba.h"
 #include "mario.h"
 
@@ -7,15 +8,21 @@ void initialiser_goomba(Goomba* g, int x, int y) {
 	g->direction = -1; // commence par aller vers la gauche
 	g->borne_gauche = x - 5;
 	g->borne_droite = x + 5;
+	g->compteur = 0;
+
 }
 
 void deplacer_goomba(Goomba* g, char map[H_MAP][L_MAP]) {
+	g->compteur++;
+	if (g->compteur < VITESSE_GOOMBA) {
+		return;
+	}
+	g->compteur = 0;
 	if (!est_solide(g->x, g->y + 1, map)) {
 		g->y++; // gravité
 	}
 	else {
 		int next_x = g->x + g->direction;
-
 		if (next_x < g->borne_gauche || next_x > g->borne_droite) {
 			g->direction *= -1;
 		}

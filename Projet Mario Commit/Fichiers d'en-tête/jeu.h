@@ -25,12 +25,14 @@ typedef struct {
 } JeuState;
 
 void init_jeu(JeuState* etat, char map[H_MAP][L_MAP]);
-void gestion_clavier(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba g);
-void mise_a_jour_jeu(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba g);
+void gestion_clavier(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba* g, int nb_goombas);
+void mise_a_jour_jeu(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba* g, int nb_goombas);
+int verifier_fin_niveau(JeuState* etat, char map[H_MAP][L_MAP]);
 void deplacement_gauche(JeuState* etat, char map[H_MAP][L_MAP]);//MODIF
 void deplacement_droite(JeuState* etat, char map[H_MAP][L_MAP]);//MODIF
+void afficher_felicitations(int nbPiece, int score);
 void verifier_collision_pieces(JeuState* etat, char map[H_MAP][L_MAP]);
-void boucle_jeu(char map[H_MAP][L_MAP], int nbPiece, int score, Goomba g);
-void verifier_mort(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba g);
+void boucle_jeu(char map[H_MAP][L_MAP], int nbPiece, int score, Goomba* g, int nb_goombas);
+void verifier_mort(JeuState* etat, char map[H_MAP][L_MAP], int nbPiece, int score, Goomba* g, int nb_goombas);
 
 #endif

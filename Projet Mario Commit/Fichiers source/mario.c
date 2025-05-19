@@ -3,6 +3,14 @@
 
 int cameraX = 0;
 
+void reinitialiser_carte(char map[H_MAP][L_MAP], char map_original[H_MAP][L_MAP]) {
+	// Copier la carte originale dans la carte de jeu
+	for (int y = 0; y < H_MAP; y++) {
+		for (int x = 0; x < L_MAP; x++) {
+			map[y][x] = map_original[y][x];
+		}
+	}
+}
 // Fonction pour initialiser l'affichage et dessiner la carte
 void affichage(char map[H_MAP][L_MAP]) {
 
@@ -57,13 +65,13 @@ void appliquer_gravite(int en_saut, int camera_x, int* position_y, char map[H_MA
 }
 
 // Version originale de la fonction dessiner (pour compatibilité avec le code existant)
-void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score, Goomba g) {
+void dessiner(int camera_x, int position_y, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score, Goomba* g, int nb_goombas) {
 	// On appelle notre nouvelle fonction avec la position_x au centre (PERSO_X)
-	dessiner_avec_position_x(camera_x, position_y, PERSO_X, map, en_saut, phase_saut, nbPiece, score, g);
+	dessiner_avec_position_x(camera_x, position_y, PERSO_X, map, en_saut, phase_saut, nbPiece, score, g, nb_goombas);
 }
 
 // Nouvelle fonction dessiner qui prend en compte la position_x du personnage
-void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score, Goomba g) {
+void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char map[H_MAP][L_MAP], int en_saut, int phase_saut, int nbPiece, int score, Goomba* goombas, int nb_goombas) {
 	// Au lieu d'effacer l'écran complètement, on place simplement le curseur en haut
 	printf("\033[H"); // Place le curseur en haut de l'écran sans effacer
 
@@ -75,28 +83,35 @@ void dessiner_avec_position_x(int camera_x, int position_y, int position_x, char
 
 	for (int i = 0; i < H_SCREEN; i++) {
 		for (int j = 0; j < L_SCREEN; j++) {
-			// Position dans la carte
 			int map_x = j + camera_x;
 
-			// Vérifier si c'est le Goomba
-			if (g.x >= camera_x && g.x < camera_x + L_SCREEN && g.x - camera_x == j && i == g.y) {
-				ligne[j] = '@'; // Caractère pour le Goomba
+			// Vérifier si c'est un Goomba
+			int goomba_trouve = 0;
+			for (int k = 0; k < nb_goombas; k++) {
+				if (goombas[k].x >= camera_x && goombas[k].x < camera_x + L_SCREEN &&
+					goombas[k].x - camera_x == j && i == goombas[k].y) {
+					ligne[j] = '@';
+					goomba_trouve = 1;
+					break;
+				}
 			}
+			if (goomba_trouve) continue;
+
 			// Vérifier si c'est le personnage
-			else if (j == position_x && (i == position_y || i == position_y - 1 || i == position_y - 2)) {
-				if (i == position_y) ligne[j] = '^';      // Pieds
-				else if (i == position_y - 1) ligne[j] = 'T'; // Corps
-				else if (i == position_y - 2) ligne[j] = 'O'; // Tête
+			if (j == position_x && (i == position_y || i == position_y - 1 || i == position_y - 2)) {
+				if (i == position_y) ligne[j] = '^';
+				else if (i == position_y - 1) ligne[j] = 'T';
+				else if (i == position_y - 2) ligne[j] = 'O';
 			}
 			// Sinon, afficher la carte
 			else if (map_x >= 0 && map_x < L_MAP && i < H_MAP) {
 				ligne[j] = map[i][map_x];
 			}
 			else {
-				ligne[j] = ' '; // Espace vide pour les zones hors carte
+				ligne[j] = ' ';
 			}
 		}
-		printf("%s\n", ligne); // Affiche la ligne complète
+		printf("%s\n", ligne);
 	}
 
 	// Flush stdout pour s'assurer que tout est affiché immédiatement

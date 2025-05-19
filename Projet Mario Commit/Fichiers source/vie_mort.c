@@ -6,9 +6,9 @@ void init_vie_state(JeuState* etat) {
     etat->position_respawn_y = 14; // Position de départ en Y (sol)
 }
 
-int est_mort(JeuState* etat, char map[H_MAP][L_MAP]) {
+int est_mort(JeuState* etat, char map[H_MAP][L_MAP], Goomba* goombas, int nb_goombas) {
     // Position du personnage dans la carte
-    int map_x = etat->camera_x + PERSO_X;
+    int map_x = etat->camera_x + etat->position_x;
     int pos_y = etat->position_y;
 
     // Vérifier si le joueur est tombé hors de la carte
@@ -22,10 +22,9 @@ int est_mort(JeuState* etat, char map[H_MAP][L_MAP]) {
         int check_y = pos_y - partie;
 
         // Si la position est valide
-        if (check_y >= 0 && check_y < H_MAP && map_x >= 0 && map_x < L_MAP) {
-            // Si on rencontre un ennemi
-            if (map[check_y][map_x] == '@') {
-                return 2; // Mort si contact avec un ennemi
+        for (int i = 0; i < nb_goombas; i++) {
+            if (goombas[i].x == map_x && goombas[i].y == check_y) {
+                return 2;
             }
         }
     }
@@ -129,6 +128,7 @@ void respawn_joueur(JeuState* etat) {
     // Restaurer la position du joueur au dernier point de respawn
     etat->camera_x = etat->position_respawn_x;
     etat->position_y = etat->position_respawn_y;
+    etat->position_x = 0;
     etat->en_saut = 0; // S'assurer que le joueur n'est pas en saut
     etat->phase_saut = 0;
 }

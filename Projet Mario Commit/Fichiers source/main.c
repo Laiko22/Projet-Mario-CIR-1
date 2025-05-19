@@ -3,9 +3,14 @@
 #include "jeu.h"
 #include "menuEchap.h"
 #include "goomba.h"
+#include "tableauScores.h"
 
 int main() {
     printf("Pour une meilleure experience de jeu, veuillez appuyer sur ALT + ENTREE pour passer la console en plein ecran.\n\n");
+
+
+
+
     int choix = 0;
     char map[H_MAP][L_MAP] = {
          { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
@@ -29,68 +34,100 @@ int main() {
          { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
     };
 
-    printf("Choix  1.Menu 2.Affichage 3.Menu+Jeu : ");
-    scanf_s("%d", &choix);
-    if (choix == 1) {
-        executer_menu_principal();
-    }
-    else if (choix == 2) {
-        Goomba g;
-        initialiser_goomba(&g, 20, 14);
-        int nbPiece = 0;
-        int score = 0;
-        boucle_jeu(map, nbPiece, score, g);
-    }
-    else if (choix == 3) {
-        int selection = 0;
-        char cle;
-        int en_jeu = 0; // Indicateur pour savoir si on est en jeu ou non
+    printf("\n");
+    printf("%s", "\033[1;31m"); // Rouge vif
 
-        afficher_menu_principal(selection);
+    printf("            MMMMMMMMMMMM               MMMMMMMMMMMM                  AAA                  RRRRRRRRRRRRRRRRR     IIIIIIIIIIIIIIIIII     OOOOOOOOOOO     \n");
+    printf("            MMMMMMMMMMMMMM           MMMMMMMMMMMMMM                 AAAAA                 RRRRRRRRRRRRRRRRRR    IIIIIIIIIIIIIIIIII   OOOOOOOOOOOOOOO   \n");
+    printf("            MMMMMMMMMMMMMMM         MMMMMMMMMMMMMMM                AAAAAAA                RRRRRRRRRRRRRRRRRR    IIIIIIIIIIIIIIIIII  OOOOOOOOOOOOOOOOO  \n");
+    printf("            MMMMMMMMMMMMMMMM       MMMMMMMMMMMMMMMM               AAAAAAAAA               RRRRRRRRRRRRRRRRRRR   IIIIIIIIIIIIIIIIII OOOOOOOOOOOOOOOOOOO \n");
+    printf("            MMMMM     MMMMMMM     MMMMM     MMMMMMM              AAAAA AAAAA              RRRRR       RRRRRRR         IIIIII       OOOOOOO     OOOOOOO \n");
+    printf("            MMMMM      MMMMMM   MMMMMM      MMMMMM              AAAAA   AAAAA             RRRRR        RRRRRR         IIIIII       OOOOOO       OOOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM              AAAAA     AAAAA            RRRRR        RRRRRR         IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM             AAAAA       AAAAA           RRRRR       RRRRRRR         IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM             AAAAA       AAAAA           RRRRRRRRRRRRRRRRRRR         IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM            AAAAAAAAAAAAAAAAAAA          RRRRRRRRRRRRRRRRRR          IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM            AAAAAAAAAAAAAAAAAAA          RRRRRRRRRRRRRRRR            IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM           AAAAAAAAAAAAAAAAAAAAA         RRRRRRRRRRR                 IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM           AAAAA           AAAAA         RRRRR  RRRRR                IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM          AAAAA             AAAAA        RRRRR   RRRRR               IIIIII       OOOOO         OOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM          AAAAA             AAAAA        RRRRR    RRRRR              IIIIII       OOOOOO       OOOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM         AAAAA               AAAAA       RRRRR     RRRRR             IIIIII       OOOOOOO     OOOOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM         AAAAA               AAAAA       RRRRR      RRRRR      IIIIIIIIIIIIIIIIII OOOOOOOOOOOOOOOOOOO \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM        AAAAA                 AAAAA      RRRRR       RRRRR     IIIIIIIIIIIIIIIIII  OOOOOOOOOOOOOOOOO  \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM        AAAAA                 AAAAA      RRRRR        RRRRR    IIIIIIIIIIIIIIIIII   OOOOOOOOOOOOOOO   \n");
+    printf("            MMMMM       MMMMM   MMMMM       MMMMM       AAAAA                   AAAAA     RRRRR         RRRRR   IIIIIIIIIIIIIIIIII     OOOOOOOOOOO     \n");
 
-        while (1) {
-            if (!en_jeu) {
-                // Mode menu principal
+    printf("%s", "\033[0m");
+    printf("\n\n");
+
+    // Afficher le message pour continuer
+    printf("%s", "\033[1;37;44m"); // Texte blanc brillant sur fond bleu
+    printf("                                                           APPUYEZ SUR UNE TOUCHE POUR CONTINUER                                    ");
+    printf("%s", "\033[0m");
+    printf("\n\n");
+
+    // Attendre que l'utilisateur appuie sur une touche
+    _getch();
+
+    // Continuer avec le menu du jeu (ou autre chose)
+    system("cls");
+
+    int selection = 0;
+    char cle;
+    int en_jeu = 0; // Indicateur pour savoir si on est en jeu ou non
+    initialiser_tableau_scores();
+    afficher_menu_principal(selection);
+
+    while (1) {
+        if (!en_jeu) {
+            // Mode menu principal
+            cle = _getch();
+            if (cle == -32 || cle == 0) {
                 cle = _getch();
-                if (cle == -32 || cle == 0) {
-                    cle = _getch();
-                    int ancienne_selection = selection;
-                    if (cle == 72 && selection > 0) selection--;
-                    else if (cle == 80 && selection < 3) selection++;
-                    if (ancienne_selection != selection) {
-                        afficher_menu_principal(selection);
-                    }
-                }
-                else if (cle == 13) {
-                    switch (selection) {
-                    case 0:
-                        nouvelle_partie();
-                        en_jeu = 1; // On passe en mode jeu
-                        Goomba g;
-                        initialiser_goomba(&g, 20, 14);
-                        int nbPiece = 0;
-                        int score = 0;
-                        boucle_jeu(map, nbPiece, score, g); // Le jeu s'exécute et retourne quand on quitte
-                        en_jeu = 0; // Retour au menu après le jeu
-                        afficher_menu_principal(selection); // Réafficher le menu principal
-                        break;
-                    case 1:
-
-                        // Gestion des sauvegardes
-                        break;
-                    case 2:
-                        // Tableau des scores
-                        break;
-                    case 3:
-                        effacer_ecran();
-                        printf("Au revoir !\n");
-                        return 0;
-                    }
+                int ancienne_selection = selection;
+                if (cle == 72 && selection > 0) selection--;
+                else if (cle == 80 && selection < 3) selection++;
+                if (ancienne_selection != selection) {
+                    afficher_menu_principal(selection);
                 }
             }
-            Sleep(10);
+            else if (cle == 13) {
+                switch (selection) {
+                case 0:
+
+                    nouvelle_partie();
+                    en_jeu = 1; // On passe en mode jeu
+                    Goomba g[MAX_GOOMBAS];
+                    int nb_goombas = 4;
+                    initialiser_goomba(&g[0], 20, 14);
+                    initialiser_goomba(&g[1], 60, 14);
+                    initialiser_goomba(&g[2], 100, 14);
+                    initialiser_goomba(&g[3], 150, 14);
+                    int nbPiece = 0;
+                    int score = 0;
+                    boucle_jeu(map, nbPiece, score, g, nb_goombas); // Le jeu s'exécute et retourne quand on quitte
+                    en_jeu = 0; // Retour au menu après le jeu
+                    afficher_menu_principal(selection); // Réafficher le menu principal
+                    break;
+                case 1:
+
+                    // Gestion des sauvegardes
+                    break;
+                case 2:
+                    menu_tableau_scores();
+                    afficher_menu_principal(selection);
+                    break;
+                case 3:
+                    effacer_ecran();
+                    printf("Au revoir !\n");
+                    return 0;
+                }
+            }
         }
+        Sleep(10);
     }
+
 
     return 0;
 }
