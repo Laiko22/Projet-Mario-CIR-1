@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <math.h>
-#include <process.h>  // Pour _beginthread et _endthread
+#include <process.h>  /
 
 #define REST 0
 #define C4  262   // Do
@@ -40,11 +40,11 @@
 #define FS6 1480  // Fa#
 #define G6  1568  // Sol
 
-// Variable globale pour contrôler la lecture de la musique
-extern int continuer_musique;  // MODIFIE
+
+extern int continuer_musique;  
 
 void playTone(int freq, int duration_ms);
 void playMusic(void* arg);
-void stopMusic(void);  // MODIFIE
+void stopMusic(void);  
 
 #endif

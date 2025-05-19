@@ -9,7 +9,7 @@ char obtenir_touche() {
 	}
 }
 
-void pause_console() { // mettre en pause
+void pause_console() {
 	printf("\nAppuyez sur une touche pour continuer...\n");
 	obtenir_touche();
 }
@@ -21,7 +21,7 @@ void obtenir_taille_console(int* largeur, int* hauteur) {
 	*hauteur = info.srWindow.Bottom - info.srWindow.Top + 1;
 }
 
-void effacer_ecran() {// effacer l'ecran 
+void effacer_ecran() {
 	system("cls");
 }
 
@@ -39,7 +39,6 @@ void afficher_menu_principal(int selection) {
 		obtenir_taille_console(&largeur_console, &hauteur_console);
 
 		int centre_x = (largeur_console - LARGEUR_MENU) / 2;
-
 		int lignes_par_option = 4;
 		int total_lignes_menu = nb_options * lignes_par_option;
 		int centre_y = (hauteur_console - total_lignes_menu) / 2;
@@ -78,14 +77,14 @@ int gestion_touches_fleche(int* selection, int max) {
 	char cle = obtenir_touche();
 	if (cle == -32 || cle == 0) {
 		cle = obtenir_touche();
-		if (cle == 72 && *selection > 0) { //fleche haut
+		if (cle == 72 && *selection > 0) {
 			(*selection)--;
 		}
-		else if (cle == 80 && *selection < max) { // fleche bas
+		else if (cle == 80 && *selection < max) {
 			(*selection)++;
 		}
 	}
-	else if (cle == 27) { // echap
+	else if (cle == 27) {
 		return -1;
 	}
 	return 0;
@@ -108,16 +107,11 @@ void choix_personnage(char* perso) {
 	while (1) {
 		effacer_ecran();
 
-
 		obtenir_taille_console(&largeur_console, &hauteur_console);
 
-
 		int centre_x = (largeur_console - LARGEUR_MENU) / 2;
-
-
 		int lignes_par_option = 4;
 		int total_lignes = NB_PERSONNAGES * lignes_par_option;
-
 		int centre_y = (hauteur_console - total_lignes) / 2;
 
 		for (int i = 0; i < centre_y; i++) {
@@ -153,7 +147,6 @@ void choix_personnage(char* perso) {
 			printf("%*s+----------------------------------------+\n", centre_x, "");
 		}
 
-
 		cle = _getch();
 		if (cle == -32 || cle == 0) {
 			cle = _getch();
@@ -161,7 +154,7 @@ void choix_personnage(char* perso) {
 			else if (cle == 80 && selection < NB_PERSONNAGES - 1) selection++;
 		}
 		else if (cle == 27) {
-			return; // Échap
+			return;
 		}
 		else if (cle == 13) {
 			strcpy_s(perso, 50, persos[selection]);
@@ -205,10 +198,8 @@ void executer_menu_principal() {
 				afficher_menu_principal(selection);
 				break;
 			case 1:
-				// Gestion des sauvegardes
 				break;
 			case 2:
-				// Tableau des scores
 				break;
 			case 3:
 				effacer_ecran();

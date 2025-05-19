@@ -4,13 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
-// Constantes pour le tableau des scores
 #define MAX_SCORES 10
 #define MAX_NOM_JOUEUR 50
 #define MAX_NOM_PERSO 20
 #define FICHIER_SCORES "scores.dat"
 
-// Structure pour stocker un score
 typedef struct {
     char nom[MAX_NOM_JOUEUR];
     char perso[MAX_NOM_PERSO];
@@ -18,7 +16,6 @@ typedef struct {
     int score;
 } Score;
 
-// Fonctions pour gérer le tableau des scores
 void initialiser_tableau_scores();
 void charger_scores();
 void sauvegarder_scores();
@@ -27,19 +24,14 @@ void trier_scores();
 void afficher_scores();
 void menu_tableau_scores();
 
-// Fonctions pour gérer le joueur actuel
 void definir_joueur_actuel(const char* pseudo, const char* perso);
 char* obtenir_pseudo_actuel();
 char* obtenir_perso_actuel();
 
-// Fonctions pour gérer le score actuel pendant la partie
 void sauvegarder_score_actuel(int pieces, int score);
 int obtenir_pieces_actuelles();
 int obtenir_score_actuel();
 
-
-
-// Fonction pour ajouter un nouveau score
 void saisir_nouveau_score(int pieces, int score);
 
 #endif

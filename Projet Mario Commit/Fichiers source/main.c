@@ -8,9 +8,6 @@
 int main() {
     printf("Pour une meilleure experience de jeu, veuillez appuyer sur ALT + ENTREE pour passer la console en plein ecran.\n\n");
 
-
-
-
     int choix = 0;
     char map[H_MAP][L_MAP] = {
          { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
@@ -35,7 +32,7 @@ int main() {
     };
 
     printf("\n");
-    printf("%s", "\033[1;31m"); // Rouge vif
+    printf("%s", "\033[1;31m");
 
     printf("            MMMMMMMMMMMM               MMMMMMMMMMMM                  AAA                  RRRRRRRRRRRRRRRRR     IIIIIIIIIIIIIIIIII     OOOOOOOOOOO     \n");
     printf("            MMMMMMMMMMMMMM           MMMMMMMMMMMMMM                 AAAAA                 RRRRRRRRRRRRRRRRRR    IIIIIIIIIIIIIIIIII   OOOOOOOOOOOOOOO   \n");
@@ -61,27 +58,23 @@ int main() {
     printf("%s", "\033[0m");
     printf("\n\n");
 
-    // Afficher le message pour continuer
-    printf("%s", "\033[1;37;44m"); // Texte blanc brillant sur fond bleu
+    printf("%s", "\033[1;37;44m");
     printf("                                                           APPUYEZ SUR UNE TOUCHE POUR CONTINUER                                    ");
     printf("%s", "\033[0m");
     printf("\n\n");
 
-    // Attendre que l'utilisateur appuie sur une touche
     _getch();
 
-    // Continuer avec le menu du jeu (ou autre chose)
     system("cls");
 
     int selection = 0;
     char cle;
-    int en_jeu = 0; // Indicateur pour savoir si on est en jeu ou non
+    int en_jeu = 0;
     initialiser_tableau_scores();
     afficher_menu_principal(selection);
 
     while (1) {
         if (!en_jeu) {
-            // Mode menu principal
             cle = _getch();
             if (cle == -32 || cle == 0) {
                 cle = _getch();
@@ -95,9 +88,8 @@ int main() {
             else if (cle == 13) {
                 switch (selection) {
                 case 0:
-
                     nouvelle_partie();
-                    en_jeu = 1; // On passe en mode jeu
+                    en_jeu = 1;
                     Goomba g[MAX_GOOMBAS];
                     int nb_goombas = 4;
                     initialiser_goomba(&g[0], 20, 14);
@@ -106,13 +98,11 @@ int main() {
                     initialiser_goomba(&g[3], 150, 14);
                     int nbPiece = 0;
                     int score = 0;
-                    boucle_jeu(map, nbPiece, score, g, nb_goombas); // Le jeu s'exécute et retourne quand on quitte
-                    en_jeu = 0; // Retour au menu après le jeu
-                    afficher_menu_principal(selection); // Réafficher le menu principal
+                    boucle_jeu(map, nbPiece, score, g, nb_goombas);
+                    en_jeu = 0;
+                    afficher_menu_principal(selection);
                     break;
                 case 1:
-
-                    // Gestion des sauvegardes
                     break;
                 case 2:
                     menu_tableau_scores();
@@ -127,7 +117,6 @@ int main() {
         }
         Sleep(10);
     }
-
 
     return 0;
 }

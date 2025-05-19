@@ -9,7 +9,7 @@ char obtenir_toucheE() {
     }
 }
 
-void pause_consoleE() { // mettre en pause
+void pause_consoleE() {
     printf("\nAppuyez sur une touche pour continuer...\n");
     obtenir_toucheE();
 }
@@ -21,7 +21,7 @@ void obtenir_taille_consoleE(int* largeur, int* hauteur) {
     *hauteur = info.srWindow.Bottom - info.srWindow.Top + 1;
 }
 
-void effacer_ecranE() {// effacer l'ecran 
+void effacer_ecranE() {
     system("cls");
 }
 
@@ -29,14 +29,14 @@ int gestion_touches_flecheE(int* selection, int max) {
     char cle = obtenir_toucheE();
     if (cle == -32 || cle == 0) {
         cle = obtenir_toucheE();
-        if (cle == 72 && *selection > 0) { //fleche haut
+        if (cle == 72 && *selection > 0) {
             (*selection)--;
         }
-        else if (cle == 80 && *selection < max) { // fleche bas
+        else if (cle == 80 && *selection < max) {
             (*selection)++;
         }
     }
-    else if (cle == 27) { // echap
+    else if (cle == 27) {
         return -1;
     }
     return 0;
@@ -82,48 +82,44 @@ void afficher_menuEchap(int selection) {
     }
 }
 
-// Retourne: 0 pour reprendre, 1 pour quitter
 int menuEchap(char map[H_MAP][L_MAP]) {
     int selection = 0;
     char cle;
 
-    // Afficher le menu d'échap
     afficher_menuEchap(selection);
 
-    // Boucle de gestion du menu d'échap
     while (1) {
         if (_kbhit()) {
             cle = _getch();
             if (cle == -32 || cle == 0) {
                 cle = _getch();
                 int ancienne_selection = selection;
-                if (cle == 72 && selection > 0) selection--; // Flèche haut
-                else if (cle == 80 && selection < 2) selection++; // Flèche bas
+                if (cle == 72 && selection > 0) selection--;
+                else if (cle == 80 && selection < 2) selection++;
 
                 if (ancienne_selection != selection) {
                     afficher_menuEchap(selection);
                 }
             }
-            else if (cle == 13) { // Touche Entrée
+            else if (cle == 13) {
                 switch (selection) {
-                case 0: // Reprendre
+                case 0:
                     effacer_ecranE();
-                    return 0; // Retourne au jeu
-                case 1: // Sauvegarder
-                    // Implémentation de la sauvegarde ici
+                    return 0;
+                case 1:
                     printf("Sauvegarde en cours...\n");
-                    Sleep(1000); // Simule une sauvegarde
+                    Sleep(1000);
                     afficher_menuEchap(selection);
                     break;
-                case 2: // Quitter
+                case 2:
                     effacer_ecranE();
 
-                    return 1; // Retourne au menu principal
+                    return 1;
                 }
             }
-            else if (cle == 27) { // Échap à nouveau
+            else if (cle == 27) {
                 effacer_ecranE();
-                return 0; // Retourne au jeu
+                return 0;
             }
         }
         Sleep(10);

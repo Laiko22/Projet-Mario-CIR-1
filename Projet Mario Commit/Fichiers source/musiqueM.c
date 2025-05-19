@@ -1,7 +1,7 @@
 #include "musiqueM.h"
 
-// Variable globale pour contrôler la lecture de la musique
-int continuer_musique = 1;  // MODIFIE
+
+int continuer_musique = 1;  
 
 int melody[][2] = {
 	{E5,150},{E5,150},{REST,150},{E5,150},{REST,150},{C5,150},{E5,300},{G5,300},
@@ -117,10 +117,10 @@ int musique_game_over[][2] = {
 
 void playTone(int freq, int duration_ms) {
 	if (freq == 0) {
-		Sleep(duration_ms);  // Pause silencieuse
+		Sleep(duration_ms);  
 	}
 	else {
-		Beep(freq, duration_ms);  // Joue la note
+		Beep(freq, duration_ms);  
 	}
 }
 

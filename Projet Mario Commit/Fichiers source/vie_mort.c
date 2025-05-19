@@ -2,26 +2,21 @@
 
 void init_vie_state(JeuState* etat) {
     etat->nb_vies = NB_VIES_INITIAL;
-    etat->position_respawn_x = 0; // Point de départ de la camera
-    etat->position_respawn_y = 14; // Position de départ en Y (sol)
+    etat->position_respawn_x = 0;
+    etat->position_respawn_y = 14;
 }
 
 int est_mort(JeuState* etat, char map[H_MAP][L_MAP], Goomba* goombas, int nb_goombas) {
-    // Position du personnage dans la carte
     int map_x = etat->camera_x + etat->position_x;
     int pos_y = etat->position_y;
 
-    // Vérifier si le joueur est tombé hors de la carte
     if (pos_y >= H_MAP - 1) {
-        return 1; // Mort par chute
+        return 1;
     }
 
-    // Verifier collision avec un ennemi (Goomba represente par '@')
-    // Vérifier pour les trois parties du corps du personnage (tête, torse, pieds)
     for (int partie = 0; partie < 3; partie++) {
         int check_y = pos_y - partie;
 
-        // Si la position est valide
         for (int i = 0; i < nb_goombas; i++) {
             if (goombas[i].x == map_x && goombas[i].y == check_y) {
                 return 2;
@@ -29,7 +24,7 @@ int est_mort(JeuState* etat, char map[H_MAP][L_MAP], Goomba* goombas, int nb_goo
         }
     }
 
-    return 0; // Pas mort
+    return 0;
 }
 
 int menu_mort(JeuState* etat) {
@@ -37,15 +32,13 @@ int menu_mort(JeuState* etat) {
     char cle;
     int largeur_console, hauteur_console;
 
-    // Diminuer le nombre de vies
     etat->nb_vies--;
 
-    // Si vies = 0, retour au menu principal
     if (etat->nb_vies <= 0) {
         effacer_ecran();
         printf("\nGame Over!\n");
         Sleep(1000);
-        return 0; // Retourner au menu principal
+        return 0;
     }
 
     while (1) {
@@ -108,10 +101,10 @@ int menu_mort(JeuState* etat) {
                 selection++;
             }
         }
-        else if (cle == 27) { // echap
+        else if (cle == 27) {
             return 0;
         }
-        else if (cle == 13) { // Entrée
+        else if (cle == 13) {
             if (selection == 0) {
                 return 1;
             }
@@ -125,28 +118,23 @@ int menu_mort(JeuState* etat) {
 }
 
 void respawn_joueur(JeuState* etat) {
-    // Restaurer la position du joueur au dernier point de respawn
     etat->camera_x = etat->position_respawn_x;
     etat->position_y = etat->position_respawn_y;
     etat->position_x = 0;
-    etat->en_saut = 0; // S'assurer que le joueur n'est pas en saut
+    etat->en_saut = 0;
     etat->phase_saut = 0;
 }
 
 void afficher_vies(JeuState* etat) {
-    // Sauvegarder la position du curseur
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
-    // Aller en haut à droite pour afficher les vies
     COORD coord;
     coord.X = L_SCREEN - 15;
     coord.Y = 0;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 
-    // Afficher les vies
     printf("Vies: %d", etat->nb_vies);
 
-    // Restaurer la position du curseur
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), csbi.dwCursorPosition);
 }
